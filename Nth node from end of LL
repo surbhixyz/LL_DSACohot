@@ -1,0 +1,31 @@
+class Solution {
+   
+    int getNthFromLast(Node head, int n) {
+      Node temp= head;
+      Node temp2=head;
+      Node len=head;
+    	if(head==null){
+    	    return -1;
+    	}
+    	int c=0;
+    	while(len.next!=null){
+    	    len=len.next;
+    	    c++;
+    	}
+    	if(n-1>c){
+    	    return -1;
+    	}
+    	
+    	int count=0;
+    	while(temp.next!=null && count!=n-1){
+    	    temp=temp.next;
+    	    count++;
+    	}
+    	
+    	while(temp.next!=null && temp2.next!=null){
+    	    temp2=temp2.next;
+    	    temp=temp.next;
+    	}
+    	return temp2.data;
+    }
+}
