@@ -1,0 +1,22 @@
+public class Solution{
+  public static Node foldorReorderLL(Node head) {
+      if(head==null) {
+         return null;
+      }
+      Node a=getMiddle(head);
+      Node b=a.next;
+      a.next=null;
+      Node c=Reverse(b);
+      Node temp=head;
+      while(temp!=null && c!=null) {
+         Node tn=temp.next;
+         Node cn=c.next;
+         temp.next=c;
+         temp=tn;
+         c.next=temp;
+         c=cn;
+      }
+      return head;
+}
+
+}
