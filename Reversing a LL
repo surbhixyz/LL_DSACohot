@@ -1,0 +1,17 @@
+class Solution { 
+    Node reverseList(Node head){
+    
+        Node Prev=null;
+        Node Next=null;
+        Node Current=head;
+        while(Current!=null){
+            Next=Current.next;
+            Current.next=Prev;
+            Prev=Current;
+            Current=Next;
+        }
+        
+        head=Prev;
+        return head;
+    }
+}
