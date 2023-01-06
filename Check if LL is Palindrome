@@ -1,0 +1,83 @@
+class Solution {
+    
+    boolean isPalindrome(Node head) {
+         if(head == null || head.next == null)
+            return true;
+        
+        boolean res=true;
+        
+        
+        
+       	Node second_half=null;  
+        
+        Node fast_ptr = head;
+        Node slow_ptr = head;
+        Node prev_of_slow_ptr = head;
+        Node midnode = null;
+        
+        while (fast_ptr != null&& fast_ptr.next != null) {
+                fast_ptr = fast_ptr.next.next;
+ 
+                
+                prev_of_slow_ptr = slow_ptr;
+                slow_ptr = slow_ptr.next;
+            }
+ 
+            if (fast_ptr != null) {
+                midnode = slow_ptr;
+                slow_ptr = slow_ptr.next;
+            }
+            second_half = slow_ptr;
+			prev_of_slow_ptr.next= null; 
+      
+        // printList(second_half);
+        second_half =  reverse(second_half); 					//passing second half to reverse function
+        
+        // printList(second_half);
+
+        res=compareList(head,second_half);		// comparing first half with reversed-second half and comparing corresponing elements
+       
+        return res;
+        }
+    
+   
+//reversing second half of the list
+    
+    public static Node reverse(Node head3){
+       Node prev=null;
+        Node temp=head3;
+        Node next=null;
+        
+        while(temp!=null){
+            next=temp.next;
+            temp.next=prev;
+            prev=temp;
+            temp=next;
+        }
+        head3=prev;
+        return head3;
+}
+    
+    
+//comparing first and second half(reversed) of the list
+    
+//if elements are equal then it implies that the LinkedList is a Pallindrome
+    
+   public static boolean compareList(Node head1, Node head2){
+       Node temp1=head1;
+       Node temp2=head2;
+       while(temp1!=null && temp2!=null){
+           if(temp1.data==temp2.data){
+               temp1=temp1.next;
+               temp2=temp2.next;
+           }
+           else{
+               return false;
+           }
+       }
+          if(temp1==null && temp2==null){
+               return true;
+           }
+      		   return false;
+       }
+}
