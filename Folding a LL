@@ -3,20 +3,54 @@ public class Solution{
       if(head==null) {
          return null;
       }
-      Node a=getMiddle(head);
-      Node b=a.next;
-      a.next=null;
-      Node c=Reverse(b);
+      Node mid=getMiddle(head);
+      Node secondhalf=mid.next;
+      mid.next=null;
+      
+      Node nn=Reverse(secondhalf);
       Node temp=head;
-      while(temp!=null && c!=null) {
+      while(temp!=null && nn!=null) {
          Node tn=temp.next;
-         Node cn=c.next;
-         temp.next=c;
+         Node cn=nn.next;
+         temp.next=nn;
          temp=tn;
-         c.next=temp;
-         c=cn;
+         nn.next=temp;
+         nn=cn;
       }
       return head;
 }
+int getMiddle(Node head)
+    {    
+         if(head==null){
+             return -1;
+         }
+         if(head.next==null){
+             return head.data;
+         }
+         
+         Node slow=head;
+         Node fast=head;
+         while(fast!=null && fast.next!=null){
+             fast=fast.next.next;
+             slow=slow.next;
+         }
+         return slow.data;
+    }
+    
+    Node reverseList(Node head){
+    
+        Node Prev=null;
+        Node Next=null;
+        Node Current=head;
+        while(Current!=null){
+            Next=Current.next;
+            Current.next=Prev;
+            Prev=Current;
+            Current=Next;
+        }
+        
+        head=Prev;
+        return head;
+    }
 
 }
