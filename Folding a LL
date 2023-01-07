@@ -1,43 +1,50 @@
-public class Solution{
-  public static Node foldorReorderLL(Node head) {
-      if(head==null) {
+class Solution {
+    
+    
+    Node reorderlist(Node head) {
+        
+        if(head==null) {
          return null;
       }
+      
       Node mid=getMiddle(head);
       Node secondhalf=mid.next;
       mid.next=null;
       
-      Node nn=Reverse(secondhalf);
-      Node temp=head;
-      while(temp!=null && nn!=null) {
-         Node tn=temp.next;
-         Node cn=nn.next;
-         temp.next=nn;
-         temp=tn;
-         nn.next=temp;
-         nn=cn;
+      Node t1=head;
+      Node t2=Reverse(secondhalf);
+      
+      while(t1!=null && t2!=null){
+          Node nt1=t1.next;
+          Node nt2=t2.next;
+          
+          t1.next=t2;
+          t1=nt1;
+          
+          t2.next=t1;
+          t2=nt2;
+         
       }
       return head;
-}
-int getMiddle(Node head)
+    }
+    
+    
+    Node getMiddle(Node head)
     {    
-         if(head==null){
-             return -1;
+         if(head==null || head.next==null){
+             return head;
          }
-         if(head.next==null){
-             return head.data;
-         }
-         
+        
          Node slow=head;
          Node fast=head;
          while(fast!=null && fast.next!=null){
              fast=fast.next.next;
              slow=slow.next;
          }
-         return slow.data;
-    }
+         return slow;
+    }
     
-    Node reverseList(Node head){
+    Node Reverse(Node head){
     
         Node Prev=null;
         Node Next=null;
@@ -50,7 +57,7 @@ int getMiddle(Node head)
         }
         
         head=Prev;
-        return head;
-    }
+        return head;
+    }
 
 }
