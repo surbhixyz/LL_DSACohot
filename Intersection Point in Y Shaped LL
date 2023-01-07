@@ -1,30 +1,45 @@
 class Solution{
    
-	int intersectPoint(Node head1, Node head2)
-    {
-        
-         Node a=head1;
-         Node b=head2;
-        
-         while(a!=b){
-             if(a==null){
-                 a=head2;
-           
-             }
-             else{
-                 a=a.next;
-              
-             }
-             if(b==null){
-                 b=head1;
-                
-             }
-             else{
-                 b=b.next;
-                
-             }
-            
+	int intersectPoint(Node head1, Node head2){
+	    Node t1=head1;
+	    Node t2=head2;
+      
+       
+       int onesize=0;
+       while(t1.next!=null){
+           t1=t1.next;
+           onesize++;
+       }
+       
+       int twosize=0;
+       while(t2.next!=null){
+           t2=t2.next;
+           twosize++;
+       }
+       
+       int diff=Math.abs(onesize+1-(twosize+1));
+         t1=head1;
+	     t2=head2;
+	     int count=0;
+	     
+       if(onesize>twosize){
+        while(count!=diff){
+            count++;
+            t1=t1.next; }
          }
-         return b.data;
-    }
+        
+        else{
+             while(count!=diff){
+                 count++;
+                 t2=t2.next; }
+        }
+        
+        while(t1!=t2){
+            t1=t1.next;
+            t2=t2.next;
+        }
+        
+        return t1.data;
+        
+}
 }
